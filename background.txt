@@ -1,0 +1,15 @@
+
+As part of assessing data quality in data management, statistical checks such as movement in a time series exceeding n standard deviation has long been used.  However, a problem with this method is the false positives that will get flagged out as data issues. 
+
+The background of this project was to come up with a way to detect data quality issues in financial time series data, whilst reducing the false positives.
+
+The motivation behind the method selected is that during periods of market volatility, these time series will experience large jumps at the same time. Hence, by looking at the behaviour of similar (positively correlated) and dissimilar (negatively correlated) series, we can determine if the jump in a series is expected, and if so to suppress from being raised as a data quality issue.
+
+Assumptions:
+- A configuration table is set up to specify parameters such as 
+    - Number of standard deviations
+    - Number of other (similar and dissimilar) series to monitor
+    - Pct of other series that experience large jumps to qualify a period of market volatility
+    - SQLs to extract the data to be checked
+    - SQLs to extract the date range the checks need to be done on
+- Output is written into a flat file with information such as the identifiers, and pct change.
